@@ -32,13 +32,16 @@ public class GameView extends View {
     protected void onDraw(Canvas canvas){
         super.onDraw(canvas);
         this.setBackgroundColor(this.getResources().getColor(R.color.grey));
-        LinkedList<Integer> grille = (LinkedList<Integer>) this.grille.getSoumissions();
-        System.out.println("test?");
+        LinkedList<Integer> grille = new LinkedList<Integer>();
+        grille.addAll(this.grille.getSoumissions());
+        System.out.println(grille);
+        System.out.println(this.grille.getSoumissions());
         for (int y=0; y<10;y++) {
             for (int x=0;x<4;x++) {
-                /*this.circle.setColor(grille.pop());
-                canvas.drawCircle(x*10,y*10, 50, this.circle);
-                System.out.println("rond grille");*/
+                this.circle.setColor(grille.pop());
+                //TODO: coordonnées propres
+                canvas.drawCircle((x*130+350),(y*130+100), 60, this.circle);
+                System.out.println("rond grille");
             }
         }
     }
