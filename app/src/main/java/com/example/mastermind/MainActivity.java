@@ -20,14 +20,14 @@ public class MainActivity extends Activity {
         mORDI = findViewById(R.id.ORDI);
         mSettings = findViewById(R.id.Settings);
         //mRules = findViewById(R.id.Rules);
-        /*mHotSeat.setOnClickListener(new View.OnClickListener() {
+        mHotSeat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent tp1Intent = new Intent(MainActivity.this, HotSeat.class);
+                Intent tp1Intent = new Intent(MainActivity.this, HotSeatActivity.class);
                 startActivity(tp1Intent);
             }
         });
-        mORDI.setOnClickListener(new View.OnClickListener() {
+        /*mORDI.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent tp2Intent = new Intent(MainActivity.this, ORDI.class);
