@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#333"
+    android:padding="10dp"
+    tools:context=".MainActivity"
+    >
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/brain">
+    </ImageView>
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Mastermind"
+        android:gravity="center"
+        android:textColor="#eee"
+        android:padding="50dp"
+        android:textSize="50dp"
+        android:autoSizeMaxTextSize="100dp"
+        android:autoSizeMinTextSize="10dp">
+    </TextView>
+
+    <Button
+        android:id="@+id/solo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/title"
+        android:padding="20dp"
+        android:layout_margin="20dp"
+        android:text="1 VS 1"
+        android:textSize="30dp"
+        android:background="#aaa">
+    </Button>
+
+    <Button
+        android:id="@+id/duo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/solo"
+        android:padding="20dp"
+        android:layout_margin="20dp"
+        android:text="1 VS ORDI"
+        android:textSize="30dp"
+        android:background="#aaa">
+    </Button>
+
+
+
+</RelativeLayout>
