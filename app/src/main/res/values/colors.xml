@@ -13,5 +13,7 @@
     <color name="green">#FFA8F387</color>
     <color name="yellow">#FFFEC603</color>
     <color name="grey">#FF333333</color>
+    <color name="pionVide">#FF999999</color>
+
 
 </resources>

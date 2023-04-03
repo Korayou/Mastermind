@@ -12,6 +12,6 @@ public class HotSeatActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(new GameView(this, new Saisie(0), new Grille()));
+        setContentView(new GameView(this, new Saisie(), new Grille()));
     }
 }

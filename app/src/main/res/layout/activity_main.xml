@@ -33,7 +33,7 @@
         </TextView>
 
         <Button
-            android:id="@+id/ORDI"
+            android:id="@+id/HotSeat"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="20dp"
@@ -44,7 +44,7 @@
         </Button>
 
         <Button
-            android:id="@+id/HotSeat"
+            android:id="@+id/ORDI"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="20dp"

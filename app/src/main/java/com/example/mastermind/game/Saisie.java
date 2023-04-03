@@ -1,6 +1,11 @@
 package com.example.mastermind.game;
 
+import android.content.Context;
 import android.graphics.Color;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.LinkedList;
 
 /*
 * Classe qui correspond à uen zone de saisie (soumission d'une combinaison ou notation)
@@ -8,42 +13,31 @@ import android.graphics.Color;
  */
 public class Saisie {
 
-    private Color[] choix;
-    private Color[] selection;
-    public Saisie(int state){
-        // state correspond à si on soumet une combinaison ou si on la note (0 combi, 1 notation)
-        if (state==0){
-            choixCombinaison();
-        } else if (state==1){
-            notation();
-        } // eventuellement signaler une erreur si on a une autre valeur
-    }
-
-    // rempli le tableau de couleur avec les pions de l'attaquant
-    public void choixCombinaison(){
-        this.choix = new Color[6];
-    }
-
-    // Rempli le tableau de couleur avec les pions du défenseur
-    public void notation(){
-        this.choix = new Color[2];
+    private LinkedList<Integer> choix;
+    private LinkedList<Integer> selection;
+    public Saisie(){
+        this.choix=new LinkedList<Integer>();
+        this.selection=new LinkedList<Integer>();
     }
 
     // getters et setters
 
-    public void setChoix(Color[] colorsToChose){
-        this.choix=colorsToChose;
+    public void setChoix(Collection<Integer> chosenColors){
+        this.choix.addAll(chosenColors);
+    }
+    public void setChoix(Integer chosenColors, int index){
+        this.choix.set(index, chosenColors);
     }
 
-    public Color[] getChoix(){
+    public Collection<Integer> getChoix(){
         return this.choix;
     }
 
-    public void setSelection(Color[] colorsSelected){
-        this.selection=colorsSelected;
+    public void setSelection(Collection<Integer> colorsSelected){
+        this.selection.addAll(colorsSelected);
     }
 
-    public Color[] getSelection(){
+    public Collection<Integer> getSelection(){
         return this.selection;
     }
 
