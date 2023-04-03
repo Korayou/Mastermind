@@ -34,13 +34,13 @@ public class MainActivity extends Activity {
                 startActivity(tp2Intent);
             }
         });*/
-        /*mSettings.setOnClickListener(new View.OnClickListener() {
+        mSettings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent tp3Intent = new Intent(MainActivity.this, Settings.class);
+                Intent tp3Intent = new Intent(MainActivity.this, SettingsActivity.class);
                 startActivity(tp3Intent);
             }
-        });*/
+        });
         /*mTP4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

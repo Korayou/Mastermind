@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">MasterMind</string>
+    <string name="title_activity_settings">SettingsActivity</string>
+
+    <!-- Preference Titles -->
+    <string name="header">Paramètres</string>
+
+    <!-- Sync Preferences -->
+    <string name="pions_title">Autoriser les pions vides</string>
+    <string name="summary">Cette fonctionnalité augmente la difficultédu jeu pour l\'attaquant</string>
 </resources>
