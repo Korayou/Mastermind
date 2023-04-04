@@ -23,6 +23,7 @@ public class GameView extends View {
         super(context);
         this.saisie=saisie;
         this.grille=grille;
+        this.setOnTouchListener(new TouchListener());
         //on initialise les collections de pions
         initpions();
         this.circle = new Paint();
