@@ -4,9 +4,10 @@ import android.view.MotionEvent;
 import android.view.View;
 
 public class TouchListener implements View.OnTouchListener{
-
-    public TouchListener(){}
-
+    private GameView view;
+    public TouchListener(GameView view) {
+        this.view=view;
+    }
     @Override
     public boolean onTouch(View v, MotionEvent event) {
         int action = event.getActionMasked();
@@ -15,7 +16,23 @@ public class TouchListener implements View.OnTouchListener{
 
         if (action==MotionEvent.ACTION_UP)
         {
-
+            if (v.getWidth()*689/420-v.getWidth()/15<y && y<v.getWidth()*689/420+v.getWidth()/15){
+                if(v.getWidth()/8-v.getWidth()/15<x && x<v.getWidth()/8+v.getWidth()/15){
+                    this.view.addChoix(0);
+                } else if(v.getWidth()*2/13+v.getWidth()/8-v.getWidth()/15<x && x<v.getWidth()*2/13+v.getWidth()/8+v.getWidth()/15){
+                    this.view.addChoix(1);
+                } else if(2*v.getWidth()*2/13+v.getWidth()/8-v.getWidth()/15<x && x<2*v.getWidth()*2/13+v.getWidth()/8+v.getWidth()/15) {
+                    this.view.addChoix(2);
+                } else if(3*v.getWidth()*2/13+v.getWidth()/8-v.getWidth()/15<x && x<3*v.getWidth()*2/13+v.getWidth()/8+v.getWidth()/15){
+                    this.view.addChoix(3);
+                } else if(4*v.getWidth()*2/13+v.getWidth()/8-v.getWidth()/15<x && x<4*v.getWidth()*2/13+v.getWidth()/8+v.getWidth()/15) {
+                    this.view.addChoix(4);
+                } else if(5*v.getWidth()*2/13+v.getWidth()/8-v.getWidth()/15<x && x<5*v.getWidth()*2/13+v.getWidth()/8+v.getWidth()/15){
+                    this.view.addChoix(5);
+                }
+            } else if (v.getHeight()-v.getWidth()/9-v.getWidth()/10<y && y<v.getHeight()-v.getWidth()/9+v.getWidth()/10){
+                this.view.changeState();
+            }
         }
         return true;
     }

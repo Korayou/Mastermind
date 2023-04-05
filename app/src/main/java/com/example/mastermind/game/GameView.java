@@ -24,10 +24,9 @@ public class GameView extends View {
         super(context);
         this.saisie=saisie;
         this.grille=grille;
-        //this.setOnTouchListener(new TouchListener());
+        this.setOnTouchListener(new TouchListener(this));
         //on initialise les collections de pions
         initpions();
-        initSizes();
         //state indique si le joueur soumet une combinaison ou false si elle est noté
         this.state=true;
         this.circle = new Paint();
@@ -50,12 +49,10 @@ public class GameView extends View {
         // affichage de la zone de saisie
         LinkedList<Integer> saisie = new LinkedList<Integer>();
         saisie.addAll(this.saisie.getSelection());
-        System.out.println(saisie.size());
         for (int i=0;i<this.saisie.getSelection().size();i++){
             this.circle.setColor(saisie.pop());
             //TODO: coordonnées propres (encore)
             canvas.drawCircle((i*this.getWidth()/5+this.getWidth()/5),this.getWidth()*58/40, this.getWidth()/12, this.circle);
-            System.out.println("rond saisie");
         }
 
         // affichage des couleurs choisissables
@@ -66,18 +63,31 @@ public class GameView extends View {
             this.circle.setColor(couleurs.pop());
             //TODO: coordonnées propres (encore)
             canvas.drawCircle((i*this.getWidth()*2/13+this.getWidth()/8),this.getWidth()*689/420, this.getWidth()/15, this.circle);
-            System.out.println("rond saisie");
+        }
+        //Test pour valider
+        this.circle.setColor(this.getResources().getColor(R.color.green));
+        canvas.drawCircle((this.getWidth()/2),this.getHeight()-this.getWidth()/9, this.getWidth()/10, this.circle);
+    }
+
+    public void changeState() {
+        if (this.saisie.getSizeSelection() == 4) {
+            /*this.state = !this.state;
+            if (this.state) {
+                this.saisie.setChoix(this.pionsAttaquant);
+            } else if (!this.state) {
+                this.saisie.setChoix(this.pionsDefenseur);
+            }*/
+            this.grille.addSoumission(this.saisie.getSelection());
+            this.saisie.initSelection(this.getResources().getColor(R.color.pionVide));
+            this.invalidate();
         }
     }
 
-    protected void initSizes(){
-
+    //Soumet une nouvelle couleur pour la séléction à soumettre
+    public void addChoix(int choix){
+        this.saisie.addSelection(choix);
+        this.invalidate();
     }
-
-    protected void redraw(){
-        invalidate();
-    }
-
     //initialise les collections de pions
     public void initpions(){
         //on initialise les pions
@@ -99,14 +109,8 @@ public class GameView extends View {
         this.pionsAttaquant.add(this.getResources().getColor(R.color.white));
 
         // on inisialise la saisie
-        if (this.state) {
-            saisie.setChoix(this.pionsAttaquant);
-        } else if(!this.state){
-            saisie.setChoix(this.pionsAttaquant);
-        } else {
-            System.out.println("KC");
-        }
-        saisie.setSelection(this.pionsPasPlaces);
+        saisie.setChoix(this.pionsAttaquant);
+        saisie.initSelection(this.getResources().getColor(R.color.pionVide));
 
         // on rempli la grille de cases grises
         grille.initGrille(this.pionsPasPlaces);

@@ -13,6 +13,7 @@ import java.util.LinkedList;
  */
 public class Saisie {
 
+    private int sizeSelection;
     private LinkedList<Integer> choix;
     private LinkedList<Integer> selection;
     public Saisie(){
@@ -22,11 +23,24 @@ public class Saisie {
 
     // getters et setters
 
-    public void setSelection(Collection<Integer> chosenColors){
-        this.selection.addAll(chosenColors);
+    public void initSelection(Integer chosenColors){
+        this.selection.removeAll(this.selection);
+        for (int i=0;i<4;i++){
+            this.selection.add(chosenColors);
+        }
+        this.sizeSelection=0;
+
     }
-    public void setSelection(Integer chosenColors, int index){
-        this.selection.set(index, chosenColors);
+    public void addSelection(Integer chosenColors){
+        if (this.sizeSelection<4){
+            this.selection.set(this.sizeSelection,this.choix.get(chosenColors));
+            this.sizeSelection+=1;
+        }
+
+    }
+
+    public int getSizeSelection(){
+        return this.sizeSelection;
     }
 
     public Collection<Integer> getChoix(){
@@ -34,10 +48,11 @@ public class Saisie {
     }
 
     public void setChoix(Collection<Integer> colorsSelected){
+        this.choix.removeAll(this.choix);
         this.choix.addAll(colorsSelected);
     }
 
-    public Collection<Integer> getSelection(){
+    public LinkedList<Integer> getSelection(){
         return this.selection;
     }
 
