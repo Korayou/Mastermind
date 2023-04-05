@@ -39,6 +39,7 @@ public class GameView extends View {
         //affichage des anciennes soumissions
         LinkedList<Integer> grille = new LinkedList<Integer>();
         grille.addAll(this.grille.getSoumissions());
+        System.out.println(grille.size());
         for (int y=0; y<10;y++) {
             for (int x=0;x<4;x++) {
                 this.circle.setColor(grille.pop());

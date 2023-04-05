@@ -21,11 +21,13 @@ public class Grille {
     }
 
     public void addSoumission(LinkedList<Integer> newSub){
-        for (int i=4;i>0;i--){
-            System.out.println("i="+i+", new sub="+newSub);
-            this.soumissions.set(this.soumissions.size()-this.sizeSubs*4-i,newSub.pop());
+        if (this.sizeSubs<10) {
+            for (int i = 4; i > 0; i--) {
+                this.soumissions.remove(0);
+                this.soumissions.addLast(newSub.poll());
+            }
+            this.sizeSubs += 1;
         }
-        this.sizeSubs+=1;
     }
 
     public void initGrille(Collection<Integer> SubToCopy){
