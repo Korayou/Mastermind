@@ -43,9 +43,10 @@ public class GameView extends View {
     protected void onDraw(Canvas canvas){
         super.onDraw(canvas);
         this.setBackgroundColor(this.getResources().getColor(R.color.grey));
-        //affichage des anciennes soumissions
         LinkedList<Integer> grille = new LinkedList<Integer>();
         grille.addAll(this.grille.getSoumissions());
+        System.out.println(grille);
+        System.out.println(this.grille.getSoumissions());
         for (int y=0; y<10;y++) {
             for (int x=0;x<4;x++) {
                 this.circle.setColor(grille.pop());
@@ -53,25 +54,6 @@ public class GameView extends View {
                 canvas.drawCircle((x*130+350),(y*130+100), 60, this.circle);
                 System.out.println("rond grille");
             }
-        }
-        // affichage de la zone de saisie
-        LinkedList<Integer> saisie = new LinkedList<Integer>();
-        saisie.addAll(this.saisie.getChoix());
-        for (int i=0;i<4;i++){
-            this.circle.setColor(saisie.pop());
-            //TODO: coordonnées propres (encore)
-            canvas.drawCircle((i*200+250),1550, 80, this.circle);
-            System.out.println("rond saisie");
-        }
-
-        // affichage des couleurs choisissables
-        LinkedList<Integer> couleurs = new LinkedList<Integer>();
-        couleurs.addAll(this.saisie.getSelection());
-        for (int i=0;i<6;i++){
-            this.circle.setColor(couleurs.pop());
-            //TODO: coordonnées propres (encore)
-            canvas.drawCircle((i*160+150),1750, 70, this.circle);
-            System.out.println("rond saisie");
         }
     }
 
