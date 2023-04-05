@@ -12,11 +12,6 @@ public class HotSeatActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Saisie saisie = new Saisie();
-        Grille grille = new Grille();
-        GameView vuePartie = new GameView(this, saisie, grille);
-        setContentView(vuePartie);
-        new SuiviPartie(vuePartie);
-
+        setContentView(new GameView(this, new Saisie(), new Grille()));
     }
 }
