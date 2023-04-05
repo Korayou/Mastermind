@@ -22,19 +22,19 @@ public class Saisie {
 
     // getters et setters
 
-    public void setChoix(Collection<Integer> chosenColors){
-        this.choix.addAll(chosenColors);
+    public void setSelection(Collection<Integer> chosenColors){
+        this.selection.addAll(chosenColors);
     }
-    public void setChoix(Integer chosenColors, int index){
-        this.choix.set(index, chosenColors);
+    public void setSelection(Integer chosenColors, int index){
+        this.selection.set(index, chosenColors);
     }
 
     public Collection<Integer> getChoix(){
         return this.choix;
     }
 
-    public void setSelection(Collection<Integer> colorsSelected){
-        this.selection.addAll(colorsSelected);
+    public void setChoix(Collection<Integer> colorsSelected){
+        this.choix.addAll(colorsSelected);
     }
 
     public Collection<Integer> getSelection(){

@@ -19,13 +19,17 @@ public class GameView extends View {
     private Saisie saisie;
     private Grille grille;
     private Paint circle;
+    private boolean state;
     public GameView(Context context,Saisie saisie,Grille grille) {
         super(context);
         this.saisie=saisie;
         this.grille=grille;
-        this.setOnTouchListener(new TouchListener());
+        //this.setOnTouchListener(new TouchListener());
         //on initialise les collections de pions
         initpions();
+        initSizes();
+        //state indique si le joueur soumet une combinaison ou false si elle est noté
+        this.state=true;
         this.circle = new Paint();
     }
 
@@ -40,32 +44,37 @@ public class GameView extends View {
             for (int x=0;x<4;x++) {
                 this.circle.setColor(grille.pop());
                 //TODO: coordonnées propres
-                canvas.drawCircle((x*130+350),(y*130+100), 60, this.circle);
-                System.out.println("rond grille");
+                canvas.drawCircle(( x*this.getWidth()/8+(this.getWidth()*21/68)),(y*this.getWidth()/8+this.getWidth()/10), this.getWidth()/17, this.circle);
             }
         }
         // affichage de la zone de saisie
         LinkedList<Integer> saisie = new LinkedList<Integer>();
-        saisie.addAll(this.saisie.getChoix());
-        for (int i=0;i<4;i++){
+        saisie.addAll(this.saisie.getSelection());
+        System.out.println(saisie.size());
+        for (int i=0;i<this.saisie.getSelection().size();i++){
             this.circle.setColor(saisie.pop());
             //TODO: coordonnées propres (encore)
-            canvas.drawCircle((i*200+250),1550, 80, this.circle);
+            canvas.drawCircle((i*this.getWidth()/5+this.getWidth()/5),this.getWidth()*58/40, this.getWidth()/12, this.circle);
             System.out.println("rond saisie");
         }
 
         // affichage des couleurs choisissables
         LinkedList<Integer> couleurs = new LinkedList<Integer>();
-        couleurs.addAll(this.saisie.getSelection());
-        for (int i=0;i<6;i++){
+        couleurs.addAll(this.saisie.getChoix());
+        System.out.println(couleurs.size());
+        for (int i=0;i<this.saisie.getChoix().size();i++){
             this.circle.setColor(couleurs.pop());
             //TODO: coordonnées propres (encore)
-            canvas.drawCircle((i*160+150),1750, 70, this.circle);
+            canvas.drawCircle((i*this.getWidth()*2/13+this.getWidth()/8),this.getWidth()*689/420, this.getWidth()/15, this.circle);
             System.out.println("rond saisie");
         }
     }
 
-    public void redraw(){
+    protected void initSizes(){
+
+    }
+
+    protected void redraw(){
         invalidate();
     }
 
@@ -90,8 +99,14 @@ public class GameView extends View {
         this.pionsAttaquant.add(this.getResources().getColor(R.color.white));
 
         // on inisialise la saisie
-        saisie.setSelection(this.pionsAttaquant);
-        saisie.setChoix(this.pionsPasPlaces);
+        if (this.state) {
+            saisie.setChoix(this.pionsAttaquant);
+        } else if(!this.state){
+            saisie.setChoix(this.pionsAttaquant);
+        } else {
+            System.out.println("KC");
+        }
+        saisie.setSelection(this.pionsPasPlaces);
 
         // on rempli la grille de cases grises
         grille.initGrille(this.pionsPasPlaces);
