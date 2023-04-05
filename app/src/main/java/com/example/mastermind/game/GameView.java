@@ -5,6 +5,8 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.TableLayout;
 
 import com.example.mastermind.R;
 
@@ -16,16 +18,24 @@ public class GameView extends View {
     private Collection<Integer> pionsAttaquant;
     private Collection<Integer> pionsDefenseur;
     private Collection<Integer> pionsPasPlaces;
+    private TableLayout grilleView;
+    private TableLayout notation1View;
+    private TableLayout notation2View;
+    private LinearLayout buttonsView;
+    private LinearLayout choixView;
+    private LinearLayout selectionView;
     private Saisie saisie;
     private Grille grille;
     private Paint circle;
+    private Context context;
     public GameView(Context context,Saisie saisie,Grille grille) {
         super(context);
+        this.context=context;
         this.saisie=saisie;
         this.grille=grille;
-        this.setOnTouchListener(new TouchListener());
         //on initialise les collections de pions
         initpions();
+        createViews();
         this.circle = new Paint();
     }
 
@@ -69,6 +79,15 @@ public class GameView extends View {
         invalidate();
     }
 
+
+
+
+    //Créer les vues nécessaires pour le jeu
+    public void createViews(){
+        LinearLayout parent = new LinearLayout(this.context);
+        parent.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+        parent.setOrientation(LinearLayout.HORIZONTAL);
+    }
     //initialise les collections de pions
     public void initpions(){
         //on initialise les pions
