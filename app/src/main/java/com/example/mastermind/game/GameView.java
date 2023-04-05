@@ -27,7 +27,7 @@ public class GameView extends View {
         this.setOnTouchListener(new TouchListener(this));
         //on initialise les collections de pions
         initpions();
-        //state indique si le joueur soumet une combinaison ou false si elle est noté
+        //state indique true si le joueur soumet une combinaison ou false si elle est noté
         this.state=true;
         this.circle = new Paint();
     }
@@ -37,6 +37,7 @@ public class GameView extends View {
         super.onDraw(canvas);
         this.setBackgroundColor(this.getResources().getColor(R.color.grey));
         //affichage des anciennes soumissions
+        //copie des soumissions
         LinkedList<Integer> grille = new LinkedList<Integer>();
         grille.addAll(this.grille.getSoumissions());
         System.out.println(grille.size());
@@ -48,6 +49,7 @@ public class GameView extends View {
             }
         }
         // affichage de la zone de saisie
+        //copie de la zone de saisie
         LinkedList<Integer> saisie = new LinkedList<Integer>();
         saisie.addAll(this.saisie.getSelection());
         for (int i=0;i<this.saisie.getSelection().size();i++){
@@ -57,6 +59,7 @@ public class GameView extends View {
         }
 
         // affichage des couleurs choisissables
+        //copie des couleurs dispos
         LinkedList<Integer> couleurs = new LinkedList<Integer>();
         couleurs.addAll(this.saisie.getChoix());
         System.out.println(couleurs.size());
@@ -65,13 +68,17 @@ public class GameView extends View {
             //TODO: coordonnées propres (encore)
             canvas.drawCircle((i*this.getWidth()*2/13+this.getWidth()/8),this.getWidth()*689/420, this.getWidth()/15, this.circle);
         }
-        //Test pour valider
+        //TODO: ajout des colonnes de notation
+        //TODO: ajout des boutons
+        //Test de bouton valider
         this.circle.setColor(this.getResources().getColor(R.color.green));
         canvas.drawCircle((this.getWidth()/2),this.getHeight()-this.getWidth()/9, this.getWidth()/10, this.circle);
     }
 
+    //Change l'état de soumission à notation après qu'une combinaision ai été soumise puis inversement
     public void changeState() {
         if (this.saisie.getSizeSelection() == 4) {
+            //partie à décommenter pour acceder à la notation
             /*this.state = !this.state;
             if (this.state) {
                 this.saisie.setChoix(this.pionsAttaquant);
@@ -84,23 +91,26 @@ public class GameView extends View {
         }
     }
 
-    //Soumet une nouvelle couleur pour la séléction à soumettre
+    //ajoute une nouvelle couleur pour la séléction à soumettre
     public void addChoix(int choix){
         this.saisie.addSelection(choix);
         this.invalidate();
     }
-    //initialise les collections de pions
+    //initialise les collections de pions et remplie saisie et grille de pions vides
     public void initpions(){
         //on initialise les pions
+        //on créer une ligne de 4 pions gris représentants une ligne de pions vides
         this.pionsPasPlaces = new LinkedList<Integer>();
         for (int i=0;i<4;i++){
             this.pionsPasPlaces.add(this.getResources().getColor(R.color.pionVide));
         }
 
+        //Le défenseur a des pions noirs et blancs
         this.pionsDefenseur = new LinkedList<Integer>();
         this.pionsDefenseur.add(this.getResources().getColor(R.color.white));
         this.pionsDefenseur.add(this.getResources().getColor(R.color.black));
 
+        //L'attaquant a des pions de couleurs
         this.pionsAttaquant = new LinkedList<Integer>();
         this.pionsAttaquant.add(this.getResources().getColor(R.color.pink));
         this.pionsAttaquant.add(this.getResources().getColor(R.color.purple));

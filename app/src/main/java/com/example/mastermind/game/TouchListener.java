@@ -16,6 +16,7 @@ public class TouchListener implements View.OnTouchListener{
 
         if (action==MotionEvent.ACTION_UP)
         {
+            //Surveille quel bouton de couleur est choisi
             if (v.getWidth()*689/420-v.getWidth()/15<y && y<v.getWidth()*689/420+v.getWidth()/15){
                 if(v.getWidth()/8-v.getWidth()/15<x && x<v.getWidth()/8+v.getWidth()/15){
                     this.view.addChoix(0);
@@ -30,6 +31,7 @@ public class TouchListener implements View.OnTouchListener{
                 } else if(5*v.getWidth()*2/13+v.getWidth()/8-v.getWidth()/15<x && x<5*v.getWidth()*2/13+v.getWidth()/8+v.getWidth()/15){
                     this.view.addChoix(5);
                 }
+            // surveille si un bouton de controlle est cliqué (ici seule la soumission est gérée)
             } else if (v.getHeight()-v.getWidth()/9-v.getWidth()/10<y && y<v.getHeight()-v.getWidth()/9+v.getWidth()/10){
                 this.view.changeState();
             }
