@@ -87,10 +87,13 @@ public class GameView extends View {
         //TODO: ajout des boutons
         //Test de bouton valider
         this.circle.setColor(this.getResources().getColor(R.color.green));
-        canvas.drawCircle((this.getWidth()/2),this.getHeight()-this.getHeight()/16, this.getWidth()/13, this.circle);
+        canvas.drawCircle((this.getWidth()/2)+(getWidth()/11)*2,this.getHeight()-this.getHeight()/16, this.getWidth()/13, this.circle);
         // bouton retour
-        /*this.circle.setColor(this.getResources().getColor(R.color.blue));
-        canvas.drawCircle((this.getWidth()/2), this.getHeight()-this.getHeight()/16, this.getWidth()/13, this.circle);*/
+        this.circle.setColor(this.getResources().getColor(R.color.blue));
+        canvas.drawCircle((this.getWidth()/2), this.getHeight()-this.getHeight()/16, this.getWidth()/13, this.circle);
+        // bouton annuler
+        this.circle.setColor(this.getResources().getColor(R.color.red));
+        canvas.drawCircle((this.getWidth()/2)-(getWidth()/11)*2, this.getHeight()-this.getHeight()/16, this.getWidth()/13, this.circle);
     }
 
     //Change l'état de soumission à notation après qu'une combinaision ai été soumise puis inversement
