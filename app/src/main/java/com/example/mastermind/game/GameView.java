@@ -5,8 +5,6 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.view.View;
-import android.widget.LinearLayout;
-import android.widget.TableLayout;
 
 import com.example.mastermind.R;
 
@@ -18,12 +16,6 @@ public class GameView extends View {
     private Collection<Integer> pionsAttaquant;
     private Collection<Integer> pionsDefenseur;
     private Collection<Integer> pionsPasPlaces;
-    private TableLayout grilleView;
-    private TableLayout notation1View;
-    private TableLayout notation2View;
-    private LinearLayout buttonsView;
-    private LinearLayout choixView;
-    private LinearLayout selectionView;
     private Saisie saisie;
     private Grille grille;
     private Paint circle;
@@ -53,7 +45,7 @@ public class GameView extends View {
             for (int x=0;x<4;x++) {
                 this.circle.setColor(grille.pop());
                 //TODO: coordonnées propres
-                canvas.drawCircle(( x*this.getWidth()/8+(this.getWidth()*21/68)),(y*this.getWidth()/8+this.getWidth()/10), this.getWidth()/17, this.circle);
+                canvas.drawCircle(( x*this.getWidth()/8+(this.getWidth()*21/68)),(y*this.getHeight()/14+this.getHeight()/21), this.getWidth()/17, this.circle);
             }
         }
         // affichage de la zone de saisie
@@ -63,7 +55,7 @@ public class GameView extends View {
         for (int i=0;i<this.saisie.getSelection().size();i++){
             this.circle.setColor(saisie.pop());
             //TODO: coordonnées propres (encore)
-            canvas.drawCircle((i*this.getWidth()/5+this.getWidth()/5),this.getWidth()*58/40, this.getWidth()/12, this.circle);
+            canvas.drawCircle((i*this.getWidth()/5+this.getWidth()/5),this.getHeight()-this.getHeight()*2/9, this.getWidth()/14, this.circle);
         }
 
         // affichage des couleurs choisissables
@@ -74,13 +66,16 @@ public class GameView extends View {
         for (int i=0;i<this.saisie.getChoix().size();i++){
             this.circle.setColor(couleurs.pop());
             //TODO: coordonnées propres (encore)
-            canvas.drawCircle((i*this.getWidth()*2/13+this.getWidth()/8),this.getWidth()*689/420, this.getWidth()/15, this.circle);
+            canvas.drawCircle((i*this.getWidth()*2/13+this.getWidth()/8),this.getHeight()-this.getHeight()/7, this.getWidth()/16, this.circle);
         }
         //TODO: ajout des colonnes de notation
         //TODO: ajout des boutons
         //Test de bouton valider
         this.circle.setColor(this.getResources().getColor(R.color.green));
-        canvas.drawCircle((this.getWidth()/2),this.getHeight()-this.getWidth()/9, this.getWidth()/10, this.circle);
+        canvas.drawCircle((this.getWidth()/2),this.getHeight()-this.getHeight()/16, this.getWidth()/13, this.circle);
+        // bouton retour
+       /* this.circle.setColor(this.getResources().getColor(R.color.blue));
+        canvas.drawCircle((this.getWidth()/2), this.getHeight()-this.getHeight()/16, this.getWidth()/13, this.circle);*/
     }
 
     //Change l'état de soumission à notation après qu'une combinaision ai été soumise puis inversement

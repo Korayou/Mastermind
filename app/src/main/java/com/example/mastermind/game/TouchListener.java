@@ -17,7 +17,7 @@ public class TouchListener implements View.OnTouchListener{
         if (action==MotionEvent.ACTION_UP)
         {
             //Surveille quel bouton de couleur est choisi
-            if (v.getWidth()*689/420-v.getWidth()/15<y && y<v.getWidth()*689/420+v.getWidth()/15){
+            if (v.getHeight()-v.getHeight()/7-v.getWidth()/16<y && y<v.getHeight()-v.getHeight()/7+v.getWidth()/16){
                 if(v.getWidth()/8-v.getWidth()/15<x && x<v.getWidth()/8+v.getWidth()/15){
                     this.view.addChoix(0);
                 } else if(v.getWidth()*2/13+v.getWidth()/8-v.getWidth()/15<x && x<v.getWidth()*2/13+v.getWidth()/8+v.getWidth()/15){
