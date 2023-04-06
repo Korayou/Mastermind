@@ -69,12 +69,27 @@ public class GameView extends View {
             canvas.drawCircle((i*this.getWidth()*2/13+this.getWidth()/8),this.getHeight()-this.getHeight()/7, this.getWidth()/16, this.circle);
         }
         //TODO: ajout des colonnes de notation
+        LinkedList<Integer> notation = new LinkedList<Integer>();
+        notation.addAll(this.grille.getNotations());
+        for(int y=0; y<10; y++) { // colonne gauche
+            for(int x=0; x<2; x++) {
+                this.circle.setColor(notation.pop());
+                canvas.drawCircle((x*this.getWidth()/11+(this.getWidth()/11)),(y*this.getHeight()/14+getHeight()/21), this.getWidth()/26, this.circle);
+            }
+        }
+        for(int y=0; y<10; y++) { // colonne droite
+            for(int x=0; x<2; x++) {
+                this.circle.setColor(notation.pop());
+                canvas.drawCircle((x*this.getWidth()/11+(this.getWidth()*4/5)),(y*this.getHeight()/14+getHeight()/21), this.getWidth()/26, this.circle);
+            }
+        }
+
         //TODO: ajout des boutons
         //Test de bouton valider
         this.circle.setColor(this.getResources().getColor(R.color.green));
         canvas.drawCircle((this.getWidth()/2),this.getHeight()-this.getHeight()/16, this.getWidth()/13, this.circle);
         // bouton retour
-       /* this.circle.setColor(this.getResources().getColor(R.color.blue));
+        /*this.circle.setColor(this.getResources().getColor(R.color.blue));
         canvas.drawCircle((this.getWidth()/2), this.getHeight()-this.getHeight()/16, this.getWidth()/13, this.circle);*/
     }
 
