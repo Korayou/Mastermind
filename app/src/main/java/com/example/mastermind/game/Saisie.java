@@ -47,6 +47,13 @@ public class Saisie {
 
     }
 
+    /*public void removeSelection(Integer color) {
+        if(this.sizeSelection<=4) {
+            this.sizeSelection-=1;
+            this.selection.set(this.sizeSelection, this.choix.get(color));
+        }
+    }*/
+
     public int getSizeSelection(){
         return this.sizeSelection;
     }

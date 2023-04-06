@@ -40,7 +40,7 @@ public class GameView extends View {
         //copie des soumissions
         LinkedList<Integer> grille = new LinkedList<Integer>();
         grille.addAll(this.grille.getSoumissions());
-        System.out.println(grille.size());
+        //System.out.println(grille.size());
         for (int y=0; y<10;y++) {
             for (int x=0;x<4;x++) {
                 this.circle.setColor(grille.pop());
@@ -62,7 +62,7 @@ public class GameView extends View {
         //copie des couleurs dispos
         LinkedList<Integer> couleurs = new LinkedList<Integer>();
         couleurs.addAll(this.saisie.getChoix());
-        System.out.println(couleurs.size());
+        //System.out.println(couleurs.size());
         for (int i=0;i<this.saisie.getChoix().size();i++){
             this.circle.setColor(couleurs.pop());
             //TODO: coordonnées propres (encore)
@@ -71,14 +71,12 @@ public class GameView extends View {
         //TODO: ajout des colonnes de notation
         LinkedList<Integer> notation = new LinkedList<Integer>();
         notation.addAll(this.grille.getNotations());
-        for(int y=0; y<10; y++) { // colonne gauche
-            for(int x=0; x<2; x++) {
+        for(int y=0; y<10; y++) {
+            for(int x=0; x<2; x++) { // colonne gauche
                 this.circle.setColor(notation.pop());
                 canvas.drawCircle((x*this.getWidth()/11+(this.getWidth()/11)),(y*this.getHeight()/14+getHeight()/21), this.getWidth()/26, this.circle);
             }
-        }
-        for(int y=0; y<10; y++) { // colonne droite
-            for(int x=0; x<2; x++) {
+            for(int x=0; x<2; x++) { // colonne droite
                 this.circle.setColor(notation.pop());
                 canvas.drawCircle((x*this.getWidth()/11+(this.getWidth()*4/5)),(y*this.getHeight()/14+getHeight()/21), this.getWidth()/26, this.circle);
             }
@@ -99,17 +97,21 @@ public class GameView extends View {
     //Change l'état de soumission à notation après qu'une combinaision ai été soumise puis inversement
     public void changeState() {
         if (this.saisie.getSizeSelection() == 4) {
-            //partie à décommenter pour acceder à la notation
-            /*this.state = !this.state;
+            this.state = !this.state;
             if (this.state) {
                 this.saisie.setChoix(this.pionsAttaquant);
+                this.grille.addNotation(this.saisie.getSelection());
             } else if (!this.state) {
                 this.saisie.setChoix(this.pionsDefenseur);
-            }*/
-            this.grille.addSoumission(this.saisie.getSelection());
+                this.grille.addSoumission(this.saisie.getSelection());
+            }
             this.saisie.initSelection(this.getResources().getColor(R.color.pionVide));
             this.invalidate();
         }
+    }
+
+    public boolean getState() {
+        return this.state;
     }
 
     //ajoute une nouvelle couleur pour la séléction à soumettre
@@ -117,6 +119,28 @@ public class GameView extends View {
         this.saisie.addSelection(choix);
         this.invalidate();
     }
+
+    /*public void removeChoix() {
+        this.saisie.removeSelection(this.getResources().getColor(R.color.pionVide));
+        this.invalidate();
+    }*/
+
+    public void clearChoix() {
+        this.saisie.getSelection().clear();
+        this.saisie.initSelection(R.color.pionVide);
+        this.invalidate();
+    }
+
+    public boolean conditionVictoire(int choix) {
+        if(choix==4) {
+            System.out.println("WIN");
+            return true;
+        } else {
+            System.out.println("LOSE");
+            return false;
+        }
+    }
+
     //initialise les collections de pions et remplie saisie et grille de pions vides
     public void initpions(){
         //on initialise les pions
