@@ -19,27 +19,26 @@ public class Bot {
     private Integer pionVide;
     private Integer[] pionsNotation;
 
-    public Bot(Collection<Integer> pionsAutorisés, Integer[] pionsNotation, Integer pionVide){
+    public Bot(Integer[] pionsAutorisés, Integer[] pionsNotation, Integer pionVide){
         this.collectionWin = new Integer[4];
         this.pionVide=pionVide;
         this.pionsNotation=pionsNotation;
         generationCombiWin(pionsAutorisés);
     }
 
-    protected void generationCombiWin(Collection<Integer> pions){
+    protected void generationCombiWin(Integer[] pions){
         Random rand = new Random();
-        int nbPions = pions.size();
-        Integer[] tabPions=(Integer[]) pions.toArray();
+        int nbPions = pions.length;
         for (int i=0;i<4;i++){
-            this.collectionWin[i]=tabPions[rand.nextInt(nbPions)];
+            this.collectionWin[i]=pions[rand.nextInt(nbPions)];
         }
     }
 
-    public Collection<Integer> notation(Integer[] soumission){
-        Collection<Integer> note=new LinkedList<Integer>();
+    public Integer[] notation(Integer[] soumission){
+        Integer[] note=new Integer[4];
         for(int i=0; i<4;i++) {
             if (this.collectionWin[i] == soumission[i]) {
-                note.add(this.pionsNotation[1]);
+                note[i]=(this.pionsNotation[1]);
             }
         }
         //On crée une copie de la combinaison gagnante pour la modifier et éviter la fausse répétition de pions blancs
@@ -47,9 +46,9 @@ public class Bot {
         for(int i=0; i<4;i++) {
             for (int y=0; y<4;y++) {
                 if (i!=y){
-                    if (this.collectionWin[y] == soumission[i]){
-                        note.add(this.pionsNotation[0]);
-                        this.collectionWin[y]=null;
+                    if (copyCombi[y] == soumission[i]){
+                        note[i]=(copyCombi[0]);
+                        copyCombi[y]=null;
                     }
                 }
             }

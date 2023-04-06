@@ -23,29 +23,31 @@ public class MainActivity extends Activity {
         mHotSeat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent tp1Intent = new Intent(MainActivity.this, HotSeatActivity.class);
-                startActivity(tp1Intent);
+                Intent HotSeat = new Intent(MainActivity.this, HotSeatActivity.class);
+                HotSeat.putExtra("bot", false);
+                startActivity(HotSeat);
             }
         });
-        /*mORDI.setOnClickListener(new View.OnClickListener() {
+        mORDI.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent tp2Intent = new Intent(MainActivity.this, ORDI.class);
-                startActivity(tp2Intent);
+                Intent ordi = new Intent(MainActivity.this, HotSeatActivity.class);
+                ordi.putExtra("bot", true);
+                startActivity(ordi);
             }
-        });*/
+        });
         mSettings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent tp3Intent = new Intent(MainActivity.this, SettingsActivity.class);
-                startActivity(tp3Intent);
+                Intent settings = new Intent(MainActivity.this, SettingsActivity.class);
+                startActivity(settings);
             }
         });
         /*mTP4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent tp4Intent = new Intent(MainActivity.this, TP4.class);
-                startActivity(tp4Intent);
+                Intent rules = new Intent(MainActivity.this, TP4.class);
+                startActivity(rules);
             }
         });*/
     }

@@ -13,20 +13,24 @@ import java.util.LinkedList;
 
 public class GameView extends View {
 
-    private Collection<Integer> pionsAttaquant;
-    private Collection<Integer> pionsDefenseur;
-    private Collection<Integer> pionsPasPlaces;
+    private Integer[] pionsAttaquant;
+    private Integer[] pionsDefenseur;
+    private Integer pionVide;
     private Saisie saisie;
     private Grille grille;
+    private boolean bot;
+    private Bot theBot;
     private Paint circle;
     private boolean state;
-    public GameView(Context context,Saisie saisie,Grille grille) {
+    public GameView(Context context,Saisie saisie,Grille grille, boolean bot) {
         super(context);
         this.saisie=saisie;
         this.grille=grille;
+        this.bot=bot;
+        initpions();
+        this.theBot=new Bot(this.pionsAttaquant, this.pionsDefenseur, this.pionVide);
         this.setOnTouchListener(new TouchListener(this));
         //on initialise les collections de pions
-        initpions();
         //state indique true si le joueur soumet une combinaison ou false si elle est noté
         this.state=true;
         this.circle = new Paint();
@@ -50,10 +54,9 @@ public class GameView extends View {
         }
         // affichage de la zone de saisie
         //copie de la zone de saisie
-        LinkedList<Integer> saisie = new LinkedList<Integer>();
-        saisie.addAll(this.saisie.getSelection());
-        for (int i=0;i<this.saisie.getSelection().size();i++){
-            this.circle.setColor(saisie.pop());
+        Integer[] saisie = this.saisie.getSelection();
+        for (int i=0;i<this.saisie.getSelection().length;i++){
+            this.circle.setColor(saisie[i]);
             //TODO: coordonnées propres (encore)
             canvas.drawCircle((i*this.getWidth()/5+this.getWidth()/5),this.getHeight()-this.getHeight()*2/9, this.getWidth()/14, this.circle);
         }
@@ -96,17 +99,28 @@ public class GameView extends View {
 
     //Change l'état de soumission à notation après qu'une combinaision ai été soumise puis inversement
     public void changeState() {
-        if (this.saisie.getSizeSelection() == 4) {
-            this.state = !this.state;
-            if (this.state) {
+        if(!this.bot) {
+            if (!this.state) {
                 this.saisie.setChoix(this.pionsAttaquant);
                 this.grille.addNotation(this.saisie.getSelection());
-            } else if (!this.state) {
+                this.saisie.initSelection(this.getResources().getColor(R.color.pionVide));
+                this.invalidate();
+                this.state = !this.state;
+            } else if (this.state && this.saisie.getSizeSelection() == 4) {
                 this.saisie.setChoix(this.pionsDefenseur);
                 this.grille.addSoumission(this.saisie.getSelection());
+                this.saisie.initSelection(this.getResources().getColor(R.color.pionVide));
+                this.invalidate();
+                this.state = !this.state;
             }
+        } else if (this.state && this.saisie.getSizeSelection() == 4) {
+            this.saisie.setChoix(this.pionsDefenseur);
+            this.grille.addSoumission(this.saisie.getSelection());
             this.saisie.initSelection(this.getResources().getColor(R.color.pionVide));
+            //On fait noter la combinaison au Bot
+            this.grille.addNotation(this.theBot.notation((this.saisie.getSelection())));
             this.invalidate();
+
         }
     }
 
@@ -126,7 +140,6 @@ public class GameView extends View {
     }*/
 
     public void clearChoix() {
-        this.saisie.getSelection().clear();
         this.saisie.initSelection(R.color.pionVide);
         this.invalidate();
     }
@@ -145,30 +158,27 @@ public class GameView extends View {
     public void initpions(){
         //on initialise les pions
         //on créer une ligne de 4 pions gris représentants une ligne de pions vides
-        this.pionsPasPlaces = new LinkedList<Integer>();
-        for (int i=0;i<4;i++){
-            this.pionsPasPlaces.add(this.getResources().getColor(R.color.pionVide));
-        }
+        this.pionVide = this.getResources().getColor(R.color.grey);
 
         //Le défenseur a des pions noirs et blancs
-        this.pionsDefenseur = new LinkedList<Integer>();
-        this.pionsDefenseur.add(this.getResources().getColor(R.color.white));
-        this.pionsDefenseur.add(this.getResources().getColor(R.color.black));
+        this.pionsDefenseur = new Integer[2];
+        this.pionsDefenseur[0]=this.getResources().getColor(R.color.white);
+        this.pionsDefenseur[1]=this.getResources().getColor(R.color.black);
 
         //L'attaquant a des pions de couleurs
-        this.pionsAttaquant = new LinkedList<Integer>();
-        this.pionsAttaquant.add(this.getResources().getColor(R.color.pink));
-        this.pionsAttaquant.add(this.getResources().getColor(R.color.purple));
-        this.pionsAttaquant.add(this.getResources().getColor(R.color.blue));
-        this.pionsAttaquant.add(this.getResources().getColor(R.color.green));
-        this.pionsAttaquant.add(this.getResources().getColor(R.color.yellow));
-        this.pionsAttaquant.add(this.getResources().getColor(R.color.white));
+        this.pionsAttaquant = new Integer[6];
+        this.pionsAttaquant[0]=this.getResources().getColor(R.color.pink);
+        this.pionsAttaquant[1]=this.getResources().getColor(R.color.purple);
+        this.pionsAttaquant[2]=this.getResources().getColor(R.color.blue);
+        this.pionsAttaquant[3]=this.getResources().getColor(R.color.green);
+        this.pionsAttaquant[4]=this.getResources().getColor(R.color.yellow);
+        this.pionsAttaquant[5]=this.getResources().getColor(R.color.white);
 
         // on inisialise la saisie
         saisie.setChoix(this.pionsAttaquant);
         saisie.initSelection(this.getResources().getColor(R.color.pionVide));
 
         // on rempli la grille de cases grises
-        grille.initGrille(this.pionsPasPlaces);
+        grille.initGrille(this.pionVide);
     }
 }

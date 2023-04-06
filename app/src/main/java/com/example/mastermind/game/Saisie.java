@@ -28,20 +28,20 @@ public class Saisie {
     // getters et setters
 
     //récupère la couleur d'un pion vide pour remplir la zone de saisie avec
-    public void initSelection(Integer chosenColors){
+    public void initSelection(Integer pionVide){
         this.selection.removeAll(this.selection);
         for (int i=0;i<4;i++){
-            this.selection.add(chosenColors);
+            this.selection.add(pionVide);
         }
         //au début la zone de séléction est vide
         this.sizeSelection=0;
 
     }
     //addSelection permet d'ajouter un pion à la zone de saisie
-    public void addSelection(Integer chosenColors){
+    public void addSelection(int indexcolor){
         //On vérifie qu'il n'y a pas déjà 4 pions
         if (this.sizeSelection<4){
-            this.selection.set(this.sizeSelection,this.choix.get(chosenColors));
+            this.selection.set(this.sizeSelection,this.choix.get(indexcolor));
             this.sizeSelection+=1;
         }
 
@@ -63,13 +63,19 @@ public class Saisie {
     }
 
     //Méthode qui permet depuis GameView de changer la liste des choix de couleur en fonction de l'état de la partie
-    public void setChoix(Collection<Integer> colorsSelected){
+    public void setChoix(Integer[] colorsSelected){
         this.choix.removeAll(this.choix);
-        this.choix.addAll(colorsSelected);
+        for (int i=0;i<colorsSelected.length;i++){
+            this.choix.add(colorsSelected[i]);
+        }
     }
 
-    public LinkedList<Integer> getSelection(){
-        return this.selection;
+    public Integer[] getSelection(){
+        Integer[] selectiontab=new Integer[4];
+        for (int i=0;i<this.selection.size();i++){
+            selectiontab[i]=this.selection.get(i);
+        }
+        return selectiontab;
     }
 
 }
