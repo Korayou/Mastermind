@@ -31,9 +31,11 @@ public class TouchListener implements View.OnTouchListener{
                 } else if(5*v.getWidth()*2/13+v.getWidth()/8-v.getWidth()/15<x && x<5*v.getWidth()*2/13+v.getWidth()/8+v.getWidth()/15){
                     this.view.addChoix(5);
                 }
-            // surveille si un bouton de controlle est cliqué (ici seule la soumission est gérée)
-            } else if (v.getHeight()-v.getWidth()/9-v.getWidth()/10<y && y<v.getHeight()-v.getWidth()/9+v.getWidth()/10){
-                this.view.changeState();
+            // surveille si un bouton de controle est cliqué (ici seule la soumission est gérée)
+            } else if (v.getHeight()-v.getWidth()/16-v.getWidth()/13<y && y<v.getHeight()-v.getHeight()/16+v.getWidth()/13){
+                if(v.getWidth()/2+(v.getWidth()/11)*2-v.getWidth()/13<x && x<v.getWidth()/2+(v.getWidth()/11)*2+v.getWidth()/13) {
+                    this.view.changeState();
+                }
             }
         }
         return true;
