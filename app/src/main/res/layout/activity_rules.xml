@@ -1,27 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/cardview_dark_background">
+    android:background="@color/cardview_dark_background"
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:autoSizeMaxTextSize="100dp"
-        android:autoSizeMinTextSize="10dp"
+        android:layout_gravity="center"
         android:text="@string/title_rules_activity"
         android:textColor="#eee"
-        android:textSize="40dp"/>
+        android:textSize="40dp" />
 
     <TextView
-        android:layout_below="@+id/title"
+        android:id="@+id/title_gen"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:padding="5dp"
+        android:text="@string/title_gen_rules"
+        android:textColor="#eee"
+        android:textSize="20dp"/>
+    <TextView
+        android:id="@+id/gen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
         android:text="@string/general_rules"
         android:textColor="#eee"
-        android:padding="5dp"/>
+        android:textSize="16dp"/>
 
+    <TextView
+        android:id="@+id/title_hot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:padding="5dp"
+        android:text="@string/title_hotseat"
+        android:textColor="#eee"
+        android:textSize="20dp"/>
+    <TextView
+        android:id="@+id/hot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:text="@string/rules_hotseat"
+        android:textColor="#eee"
+        android:textSize="16dp"/>
 
-</RelativeLayout>
+    <TextView
+        android:id="@+id/title_bot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:padding="5dp"
+        android:text="@string/title_bot"
+        android:textColor="#eee"
+        android:textSize="20dp"/>
+    <TextView
+        android:id="@+id/bot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:text="@string/rules_bot"
+        android:textColor="#eee"
+        android:textSize="16dp"/>
+</LinearLayout>

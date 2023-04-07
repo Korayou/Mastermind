@@ -11,11 +11,14 @@
     <string name="summary">Cette fonctionnalité augmente la difficulté du jeu pour l\'attaquant</string>
     
     <!-- Rules -->
+    <string name="title_gen_rules">Règles générales :</string>
     <string name="general_rules">Le mastermind est un jeu qui se joue généralement à deux, un défenseur doit choisir un code couleur que l\'attaquant devra deviner.
-    Pour se faire, une fois le code choisi par le 1er joueur, le 2nd a 10 tentatives pour le retrouver, après chaque essai le défenseur évalue la proposition.
+    Pour se faire, une fois le code choisi par le 1er joueur, le 2nd a 10 tentatives pour le retrouver, après chaque essai la proposition est évalué.
     Avec des pions noirs il indique les couleurs bien placées, et avec des pions blancs des couleurs mal placées, s\'il ne place pas de pion c\'est que la couleur
         de la proposition n\'est pas dans le code à trouver.</string>
-    <string name="rules_hotseat"></string>
-    <string name="rules_bot"></string>
+    <string name="title_hotseat">Mode 1 vs 1 :</string>
+    <string name="rules_hotseat">Mode de jeu classique, le défenseur choisit un code, l\'attaquant fait ces propositions et la notation de chaque tentative est faite à la main par le défenseur.</string>
+    <string name="title_bot">Mode 1 vs Ordi :</string>
+    <string name="rules_bot">Dans ce mode de jeu, le code couleur est choisi aléatoirement par un bot, et les notations des essaies est sont faites de manière automatique.</string>
 
 </resources>
