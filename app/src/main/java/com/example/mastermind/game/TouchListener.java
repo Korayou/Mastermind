@@ -38,9 +38,6 @@ public class TouchListener implements View.OnTouchListener{
             // surveille si un bouton de controle est cliqué
             } else if (v.getHeight()-v.getWidth()/16-v.getWidth()/13<y && y<v.getHeight()-v.getHeight()/16+v.getWidth()/13){
                 if(v.getWidth()/2+(v.getWidth()/11)*2-v.getWidth()/13<x && x<v.getWidth()/2+(v.getWidth()/11)*2+v.getWidth()/13) { // soumettre
-                    if(!this.view.getState()) {
-                        this.view.conditionVictoire(i);
-                    }
                     this.view.changeState();
                     i = 0;
                 } else if (v.getWidth()/2-v.getWidth()/13<x && x<v.getWidth()/2+v.getWidth()/13) { // retour

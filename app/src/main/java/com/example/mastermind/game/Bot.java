@@ -35,10 +35,11 @@ public class Bot {
     }
 
     public Integer[] notation(Integer[] soumission){
-        Integer[] note=new Integer[4];
+        LinkedList<Integer> note=new LinkedList<>();
         for(int i=0; i<4;i++) {
-            if (this.collectionWin[i] == soumission[i]) {
-                note[i]=(this.pionsNotation[1]);
+            if (this.collectionWin[i]==soumission[i]) {
+                note.add(this.pionsNotation[1]);
+                System.out.println(note.getLast()+" good");
             }
         }
         //On crée une copie de la combinaison gagnante pour la modifier et éviter la fausse répétition de pions blancs
@@ -47,13 +48,24 @@ public class Bot {
             for (int y=0; y<4;y++) {
                 if (i!=y){
                     if (copyCombi[y] == soumission[i]){
-                        note[i]=(copyCombi[0]);
+                        note.add(this.pionsNotation[0]);
+                        System.out.println(note.getLast()+" almost");
                         copyCombi[y]=null;
                     }
                 }
             }
         }
+        // On complête avec des cases vides
+        while (note.size()<4){
+            note.addLast(this.pionVide);
+        }
 
-        return note;
+        Integer[] tabnote = new Integer[4];
+        //fill tab TODO: and shuffle
+        Random rand = new Random();
+        for(int i=0; i<4;i++) {
+            tabnote[i]=note.get(i);
+        }
+        return tabnote;
     }
 }

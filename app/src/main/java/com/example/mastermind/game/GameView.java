@@ -44,7 +44,6 @@ public class GameView extends View {
         //copie des soumissions
         LinkedList<Integer> grille = new LinkedList<Integer>();
         grille.addAll(this.grille.getSoumissions());
-        //System.out.println(grille.size());
         for (int y=0; y<10;y++) {
             for (int x=0;x<4;x++) {
                 this.circle.setColor(grille.pop());
@@ -55,7 +54,7 @@ public class GameView extends View {
         // affichage de la zone de saisie
         //copie de la zone de saisie
         Integer[] saisie = this.saisie.getSelection();
-        for (int i=0;i<this.saisie.getSelection().length;i++){
+        for (int i=0;i<4;i++){
             this.circle.setColor(saisie[i]);
             //TODO: coordonnées propres (encore)
             canvas.drawCircle((i*this.getWidth()/5+this.getWidth()/5),this.getHeight()-this.getHeight()*2/9, this.getWidth()/14, this.circle);
@@ -65,7 +64,6 @@ public class GameView extends View {
         //copie des couleurs dispos
         LinkedList<Integer> couleurs = new LinkedList<Integer>();
         couleurs.addAll(this.saisie.getChoix());
-        //System.out.println(couleurs.size());
         for (int i=0;i<this.saisie.getChoix().size();i++){
             this.circle.setColor(couleurs.pop());
             //TODO: coordonnées propres (encore)
@@ -103,6 +101,7 @@ public class GameView extends View {
             if (!this.state) {
                 this.saisie.setChoix(this.pionsAttaquant);
                 this.grille.addNotation(this.saisie.getSelection());
+                victoire();
                 this.saisie.initSelection(this.getResources().getColor(R.color.pionVide));
                 this.invalidate();
                 this.state = !this.state;
@@ -110,17 +109,17 @@ public class GameView extends View {
                 this.saisie.setChoix(this.pionsDefenseur);
                 this.grille.addSoumission(this.saisie.getSelection());
                 this.saisie.initSelection(this.getResources().getColor(R.color.pionVide));
-                this.invalidate();
+                invalidate();
                 this.state = !this.state;
             }
         } else if (this.state && this.saisie.getSizeSelection() == 4) {
-            this.saisie.setChoix(this.pionsDefenseur);
-            this.grille.addSoumission(this.saisie.getSelection());
+            Integer[] combi = this.saisie.getSelection();
+            this.grille.addSoumission(combi);
             this.saisie.initSelection(this.getResources().getColor(R.color.pionVide));
             //On fait noter la combinaison au Bot
-            this.grille.addNotation(this.theBot.notation((this.saisie.getSelection())));
-            this.invalidate();
-
+            this.grille.addNotation(this.theBot.notation((combi)));
+            victoire();
+            invalidate();
         }
     }
 
@@ -140,12 +139,19 @@ public class GameView extends View {
     }*/
 
     public void clearChoix() {
-        this.saisie.initSelection(R.color.pionVide);
+        this.saisie.initSelection(this.getResources().getColor(R.color.pionVide));
         this.invalidate();
     }
 
-    public boolean conditionVictoire(int choix) {
-        if(choix==4) {
+    public boolean victoire (){
+        Integer[] lastNotation = this.grille.getLastNotation();
+        int nbWin=0;
+        for (int i=0;i<4;i++){
+            if (lastNotation[i]==this.pionsDefenseur[1]){
+                nbWin++;
+            }
+        }
+        if(nbWin==4) {
             System.out.println("WIN");
             return true;
         } else {

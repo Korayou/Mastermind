@@ -76,5 +76,12 @@ public class Grille {
         return this.notations;
     }
 
+    public Integer[] getLastNotation(){
+        Integer[] lastNotation = new Integer[4];
+        for (int i=0;i<4;i++){
+            lastNotation[i]=this.notations.get(this.notations.size()-i-1);
+        }
+        return lastNotation;
+    }
 
 }
