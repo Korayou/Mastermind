@@ -1,11 +1,21 @@
 <resources>
     <string name="app_name">MasterMind</string>
     <string name="title_activity_settings">SettingsActivity</string>
+    <string name="title_rules_activity">Règles</string>
 
     <!-- Preference Titles -->
     <string name="header">Paramètres</string>
 
     <!-- Sync Preferences -->
     <string name="pions_title">Autoriser les pions vides</string>
-    <string name="summary">Cette fonctionnalité augmente la difficultédu jeu pour l\'attaquant</string>
+    <string name="summary">Cette fonctionnalité augmente la difficulté du jeu pour l\'attaquant</string>
+    
+    <!-- Rules -->
+    <string name="general_rules">Le mastermind est un jeu qui se joue généralement à deux, un défenseur doit choisir un code couleur que l\'attaquant devra deviner.
+    Pour se faire, une fois le code choisi par le 1er joueur, le 2nd a 10 tentatives pour le retrouver, après chaque essai le défenseur évalue la proposition.
+    Avec des pions noirs il indique les couleurs bien placées, et avec des pions blancs des couleurs mal placées, s\'il ne place pas de pion c\'est que la couleur
+        de la proposition n\'est pas dans le code à trouver.</string>
+    <string name="rules_hotseat"></string>
+    <string name="rules_bot"></string>
+
 </resources>

@@ -10,7 +10,7 @@ public class MainActivity extends Activity {
     private Button mHotSeat;
     private Button mORDI;
     private Button mSettings;
-    //private Button mRules;
+    private Button mRules;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,7 +19,7 @@ public class MainActivity extends Activity {
         mHotSeat = findViewById(R.id.HotSeat);
         mORDI = findViewById(R.id.ORDI);
         mSettings = findViewById(R.id.Settings);
-        //mRules = findViewById(R.id.Rules);
+        mRules = findViewById(R.id.Rules);
         mHotSeat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -43,12 +43,12 @@ public class MainActivity extends Activity {
                 startActivity(settings);
             }
         });
-        /*mTP4.setOnClickListener(new View.OnClickListener() {
+        mRules.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent rules = new Intent(MainActivity.this, TP4.class);
+                Intent rules = new Intent(MainActivity.this, RulesActivity.class);
                 startActivity(rules);
             }
-        });*/
+        });
     }
 }
