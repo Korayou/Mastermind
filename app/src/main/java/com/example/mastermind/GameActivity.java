@@ -1,6 +1,7 @@
 package com.example.mastermind;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Paint;
 import android.os.Bundle;
@@ -11,7 +12,7 @@ import com.example.mastermind.game.GameView;
 import com.example.mastermind.game.Grille;
 import com.example.mastermind.game.Saisie;
 
-public class GameActivity extends Activity {
+public class GameActivity extends Activity implements SaisieActivity  {
     private Integer[] pionsAttaquant;
     private Integer[] pionsDefenseur;
     private Integer pionVide;
@@ -33,9 +34,15 @@ public class GameActivity extends Activity {
         initpions();
         this.theBot=new Bot(this.pionsAttaquant, this.pionsDefenseur, this.pionVide);
         if(!this.bot){
-            //ChoiceCombi
+            Intent choiceCombi = new Intent(this, ChoiceCombi.class);
+            int[] tabpions=new int[6];
+            for (int i=0;i<this.pionsAttaquant.length;i++) {
+                tabpions[i] = this.pionsAttaquant[i];
+            }
+            choiceCombi.putExtra("pions", tabpions);
+            startActivityForResult(choiceCombi, 1);
         }
-        this.view=new GameView(this,this.saisie, this.grille);
+        this.view=new GameView(this,this,this.saisie, this.grille);
         setContentView(view);
     }
 
@@ -65,10 +72,6 @@ public class GameActivity extends Activity {
             victoire();
             this.view.invalidate();
         }
-    }
-
-    public boolean getState() {
-        return this.state;
     }
 
     //ajoute une nouvelle couleur pour la séléction à soumettre

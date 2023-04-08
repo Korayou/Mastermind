@@ -1,5 +1,6 @@
 package com.example.mastermind.game;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -11,6 +12,7 @@ import android.view.View;
 
 import com.example.mastermind.GameActivity;
 import com.example.mastermind.R;
+import com.example.mastermind.SaisieActivity;
 
 import java.util.Collection;
 import java.util.LinkedList;
@@ -23,8 +25,8 @@ public class GameView extends View {
     private Bitmap cancelBtn;
     private Bitmap backBtn;
     private Bitmap validBtn;
-    public GameView(GameActivity context, Saisie saisie, Grille grille) {
-        super(context);
+    public GameView(Context con, SaisieActivity context, Saisie saisie, Grille grille) {
+        super(con);
         this.saisie=saisie;
         this.grille=grille;
         this.setOnTouchListener(new TouchListener(context));
