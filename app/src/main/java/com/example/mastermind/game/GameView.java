@@ -1,6 +1,8 @@
 package com.example.mastermind.game;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -22,6 +24,9 @@ public class GameView extends View {
     private Bot theBot;
     private Paint circle;
     private boolean state;
+    private Bitmap cancelBtn;
+    private Bitmap backBtn;
+    private Bitmap validBtn;
     public GameView(Context context,Saisie saisie,Grille grille, boolean bot) {
         super(context);
         this.saisie=saisie;
@@ -85,6 +90,9 @@ public class GameView extends View {
 
         //TODO: ajout des boutons
         //Test de bouton valider
+        /*validBtn = BitmapFactory.decodeResource(getResources(), R.drawable.valid_button);
+
+        canvas.drawBitmap(validBtn, this.getWidth()/2+this.getWidth()/11-this.getWidth()/13, this.getHeight()/2+this.getHeight()/16+this.getWidth()/13, null);*/
         this.circle.setColor(this.getResources().getColor(R.color.green));
         canvas.drawCircle((this.getWidth()/2)+(getWidth()/11)*2,this.getHeight()-this.getHeight()/16, this.getWidth()/13, this.circle);
         // bouton retour
@@ -133,10 +141,10 @@ public class GameView extends View {
         this.invalidate();
     }
 
-    /*public void removeChoix() {
+    public void removePion() {
         this.saisie.removeSelection(this.getResources().getColor(R.color.pionVide));
         this.invalidate();
-    }*/
+    }
 
     public void clearChoix() {
         this.saisie.initSelection(this.getResources().getColor(R.color.pionVide));

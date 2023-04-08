@@ -41,7 +41,7 @@ public class TouchListener implements View.OnTouchListener{
                     this.view.changeState();
                     i = 0;
                 } else if (v.getWidth()/2-v.getWidth()/13<x && x<v.getWidth()/2+v.getWidth()/13) { // retour
-                    //this.view.removeChoix();
+                    this.view.removePion();
                 } else if (v.getWidth()/2-(v.getWidth()/11)*2-v.getWidth()/13<x && x<v.getWidth()/2-(v.getWidth()/11)*2+v.getWidth()/13) { // annuler
                     this.view.clearChoix();
                 }
