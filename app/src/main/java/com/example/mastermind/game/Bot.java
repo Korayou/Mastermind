@@ -36,25 +36,50 @@ public class Bot {
 
     public Integer[] notation(Integer[] soumission){
         LinkedList<Integer> note=new LinkedList<>();
+        Integer[] copyCombi = new Integer[4];
+        System.arraycopy(this.collectionWin, 0, copyCombi, 0,4);
+
+        //noirs
         for(int i=0; i<4;i++) {
-            if (this.collectionWin[i]==soumission[i]) {
+            if (copyCombi[i]==soumission[i]) {
                 note.add(this.pionsNotation[1]);
-                System.out.println(note.getLast()+" good");
+                copyCombi[i]=-1;
+                System.out.println(note.getLast()+" good "+i);
             }
         }
-        //On crée une copie de la combinaison gagnante pour la modifier et éviter la fausse répétition de pions blancs
-        Integer[] copyCombi = this.collectionWin;
+
+        //blancs
         for(int i=0; i<4;i++) {
-            for (int y=0; y<4;y++) {
-                if (i!=y){
-                    if (copyCombi[y] == soumission[i]){
+            if(copyCombi[i]!=-1){
+                for (int y=0;y<4;y++){
+                    if (soumission[y]==copyCombi[i]) {
                         note.add(this.pionsNotation[0]);
-                        System.out.println(note.getLast()+" almost");
-                        copyCombi[y]=null;
+                        System.out.println(note.getLast() + " almost "+i);
+                        copyCombi[i] = -1;
                     }
                 }
             }
         }
+
+
+       /* Integer[] copyCombi = new Integer[4];
+        System.arraycopy(this.collectionWin, 0, copyCombi, 0,4);
+        for(int i=0; i<4;i++) {
+            for(int y=0;y<4;y++){
+                if(i==y&&soumission[i]==copyCombi[y]){
+                    note.add(this.pionsNotation[1]);
+                    System.out.println(note.getLast()+" good");
+                    copyCombi[y]=-1;
+                    break;
+                } else if (soumission[i]==copyCombi[y]){
+                    note.add(this.pionsNotation[0]);
+                    System.out.println(note.getLast()+" almost");
+                    copyCombi[y]=-1;
+                    break;
+                }
+            }
+        }*/
+
         // On complête avec des cases vides
         while (note.size()<4){
             note.addLast(this.pionVide);
