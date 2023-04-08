@@ -1,6 +1,7 @@
 package com.example.mastermind.game;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -88,19 +89,46 @@ public class GameView extends View {
             }
         }
 
-        //TODO: ajout des boutons
-        //Test de bouton valider
-        /*validBtn = BitmapFactory.decodeResource(getResources(), R.drawable.valid_button);
-
-        canvas.drawBitmap(validBtn, this.getWidth()/2+this.getWidth()/11-this.getWidth()/13, this.getHeight()/2+this.getHeight()/16+this.getWidth()/13, null);*/
-        this.circle.setColor(this.getResources().getColor(R.color.green));
-        canvas.drawCircle((this.getWidth()/2)+(getWidth()/11)*2,this.getHeight()-this.getHeight()/16, this.getWidth()/13, this.circle);
+        // bouton valider
+        /*this.circle.setColor(this.getResources().getColor(R.color.green)); // version dessin
+        canvas.drawCircle((this.getWidth()/2)+(getWidth()/11)*2,this.getHeight()-this.getHeight()/16, this.getWidth()/13, this.circle);*/
+        validBtn = decodeSampledBitmapFromResource(getResources(), R.drawable.valid_button, getWidth()/13, getWidth()/13); // version img
+        canvas.drawBitmap(validBtn, this.getWidth()/2+(this.getWidth()/11)*2-getWidth()/13, this.getHeight()/2+this.getHeight()*2/5, null);
         // bouton retour
-        this.circle.setColor(this.getResources().getColor(R.color.blue));
-        canvas.drawCircle((this.getWidth()/2), this.getHeight()-this.getHeight()/16, this.getWidth()/13, this.circle);
+       /* this.circle.setColor(this.getResources().getColor(R.color.blue));
+        canvas.drawCircle((this.getWidth()/2), this.getHeight()-this.getHeight()/16, this.getWidth()/13, this.circle);*/
+        backBtn = decodeSampledBitmapFromResource(getResources(), R.drawable.back_button, getWidth()/13, getWidth()/13);
+        canvas.drawBitmap(backBtn, this.getWidth()/2-getWidth()/13, this.getHeight()/2+this.getHeight()*2/5, null);
         // bouton annuler
-        this.circle.setColor(this.getResources().getColor(R.color.red));
-        canvas.drawCircle((this.getWidth()/2)-(getWidth()/11)*2, this.getHeight()-this.getHeight()/16, this.getWidth()/13, this.circle);
+        /*this.circle.setColor(this.getResources().getColor(R.color.red));
+        canvas.drawCircle((this.getWidth()/2)-(getWidth()/11)*2, this.getHeight()-this.getHeight()/16, this.getWidth()/13, this.circle);*/
+        cancelBtn = decodeSampledBitmapFromResource(getResources(), R.drawable.cancel_button, getWidth()/13, getWidth()/13);
+        canvas.drawBitmap(cancelBtn, this.getWidth()/2-(getWidth()/11)*2-getWidth()/13, this.getHeight()/2+this.getHeight()*2/5, null);
+    }
+
+    public static int calculateInSampleSize(BitmapFactory.Options options, int reqWidth, int reqHeight) {
+        final int height = options.outHeight;
+        final int width = options.outWidth;
+        int inSampleSize = 1;
+
+        if (height > reqHeight || width > reqWidth) {
+            final int halfHeight = height / 2;
+            final int halfWidth = width / 2;
+
+            while ((halfHeight / inSampleSize) >= reqHeight && (halfWidth / inSampleSize) >= reqWidth) {
+                inSampleSize *= 3;
+            }
+        }
+
+        return inSampleSize;
+    }
+    public Bitmap decodeSampledBitmapFromResource(Resources res, int resId, int width, int height) {
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inJustDecodeBounds = true;
+        BitmapFactory.decodeResource(res, resId, options);
+        options.inSampleSize = calculateInSampleSize(options, width, height);
+        options.inJustDecodeBounds = false;
+        return BitmapFactory.decodeResource(res, resId, options);
     }
 
     //Change l'état de soumission à notation après qu'une combinaision ai été soumise puis inversement
