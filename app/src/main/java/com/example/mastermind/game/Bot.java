@@ -43,42 +43,23 @@ public class Bot {
         for(int i=0; i<4;i++) {
             if (copyCombi[i]==soumission[i]) {
                 note.add(this.pionsNotation[1]);
-                copyCombi[i]=-1;
+                copyCombi[i]=null;
                 System.out.println(note.getLast()+" good "+i);
             }
         }
 
         //blancs
         for(int i=0; i<4;i++) {
-            if(copyCombi[i]!=-1){
+            if(copyCombi[i]!=null){
                 for (int y=0;y<4;y++){
                     if (soumission[y]==copyCombi[i]) {
                         note.add(this.pionsNotation[0]);
                         System.out.println(note.getLast() + " almost "+i);
-                        copyCombi[i] = -1;
+                        copyCombi[i] = null;
                     }
                 }
             }
         }
-
-
-       /* Integer[] copyCombi = new Integer[4];
-        System.arraycopy(this.collectionWin, 0, copyCombi, 0,4);
-        for(int i=0; i<4;i++) {
-            for(int y=0;y<4;y++){
-                if(i==y&&soumission[i]==copyCombi[y]){
-                    note.add(this.pionsNotation[1]);
-                    System.out.println(note.getLast()+" good");
-                    copyCombi[y]=-1;
-                    break;
-                } else if (soumission[i]==copyCombi[y]){
-                    note.add(this.pionsNotation[0]);
-                    System.out.println(note.getLast()+" almost");
-                    copyCombi[y]=-1;
-                    break;
-                }
-            }
-        }*/
 
         // On complête avec des cases vides
         while (note.size()<4){
@@ -86,7 +67,7 @@ public class Bot {
         }
 
         Integer[] tabnote = new Integer[4];
-        //fill tab TODO: and shuffle
+        //fill tab
         Random rand = new Random();
         for(int i=0; i<4;i++) {
             tabnote[i]=note.get(i);
