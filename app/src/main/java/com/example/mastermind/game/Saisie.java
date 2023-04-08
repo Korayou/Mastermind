@@ -48,10 +48,10 @@ public class Saisie {
     }
 
     public void removeSelection(Integer pionVide) {
-        if(this.sizeSelection<=4 && this.sizeSelection>0) {
-            this.selection.removeLast();
+        if(this.sizeSelection>0) {
+            this.selection.remove(this.sizeSelection-1);
             this.selection.add(pionVide);
-            this.sizeSelection-=1;
+            this.sizeSelection--;
         }
     }
 
