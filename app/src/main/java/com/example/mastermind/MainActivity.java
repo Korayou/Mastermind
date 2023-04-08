@@ -23,7 +23,7 @@ public class MainActivity extends Activity {
         mHotSeat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent HotSeat = new Intent(MainActivity.this, HotSeatActivity.class);
+                Intent HotSeat = new Intent(MainActivity.this, GameActivity.class);
                 HotSeat.putExtra("bot", false);
                 startActivity(HotSeat);
             }
@@ -31,7 +31,7 @@ public class MainActivity extends Activity {
         mORDI.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent ordi = new Intent(MainActivity.this, HotSeatActivity.class);
+                Intent ordi = new Intent(MainActivity.this, GameActivity.class);
                 ordi.putExtra("bot", true);
                 startActivity(ordi);
             }

@@ -25,7 +25,8 @@
             android:text="Mastermind"
             android:gravity="center"
             android:textColor="#eee"
-            android:padding="50dp"
+            android:paddingHorizontal="10dp"
+            android:paddingVertical="40dp"
             android:textSize="50dp"
             android:autoSizeMaxTextSize="100dp"
             android:autoSizeMinTextSize="10dp">
