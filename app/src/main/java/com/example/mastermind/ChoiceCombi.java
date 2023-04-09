@@ -14,12 +14,18 @@ public class ChoiceCombi extends Activity  implements SaisieActivity {
     private Saisie saisie;
     private Integer[] combiGagnante;
     private Integer[] pions;
+    private boolean emptyPion;
     private View view;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         int[] tab = getIntent().getIntArrayExtra("pions");
-        this.pions=new Integer[6];
+        this.emptyPion = getIntent().getBooleanExtra("emptyPion", false);
+        if(emptyPion) {
+            this.pions=new Integer[7];
+        } else {
+            this.pions=new Integer[6];
+        }
         for (int i=0;i<tab.length;i++) {
             this.pions[i] = tab[i];
         }
@@ -36,7 +42,12 @@ public class ChoiceCombi extends Activity  implements SaisieActivity {
     public void changeState(){
         if(this.saisie.getSizeSelection()==4) {
             Intent returnIntent = new Intent();
-            int[] tabpions=new int[6];
+            int[] tabpions;
+            if(emptyPion) {
+                tabpions=new int[7];
+            } else {
+                tabpions=new int[6];
+            }
             for (int i=0;i<this.saisie.getSizeSelection();i++) {
                 tabpions[i] = this.saisie.getSelection()[i];
             }

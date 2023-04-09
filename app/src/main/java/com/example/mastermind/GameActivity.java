@@ -27,6 +27,7 @@ public class GameActivity extends Activity implements SaisieActivity  {
     private Grille grille;
     private boolean bot;
     private Bot theBot;
+    private boolean emptyPion;
     private boolean state;
     private View view;
     private LinearLayout rootView;
@@ -36,6 +37,7 @@ public class GameActivity extends Activity implements SaisieActivity  {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.bot = getIntent().getBooleanExtra("bot", false);
+        this.emptyPion = getIntent().getBooleanExtra("pionVide", false);
         this.state=true;
         this.saisie=new Saisie();
         this.grille=new Grille();
@@ -45,10 +47,16 @@ public class GameActivity extends Activity implements SaisieActivity  {
             this.combiGagnante=this.theBot.getCollectionWin();
         } else if(!this.bot){
             Intent choiceCombi = new Intent(this, ChoiceCombi.class);
-            int[] tabpions=new int[6];
+            int[] tabpions;
+            if(emptyPion) {
+                tabpions=new int[7];
+            } else {
+                tabpions=new int[6];
+            }
             for (int i=0;i<this.pionsAttaquant.length;i++) {
                 tabpions[i] = this.pionsAttaquant[i];
             }
+            choiceCombi.putExtra("emptyPion", emptyPion);
             choiceCombi.putExtra("pions", tabpions);
             startActivityForResult(choiceCombi, 1);
         }
@@ -67,7 +75,11 @@ public class GameActivity extends Activity implements SaisieActivity  {
         if (requestCode == 1) {
             if(resultCode == Activity.RESULT_OK){
                 int[] tab = data.getIntArrayExtra("choix");
-                this.combiGagnante=new Integer[6];
+                if(emptyPion) {
+                    this.combiGagnante=new Integer[7];
+                } else {
+                    this.combiGagnante=new Integer[6];
+                }
                 for (int i=0;i<tab.length;i++) {
                     this.combiGagnante[i] = tab[i];
                 }
@@ -176,13 +188,20 @@ public class GameActivity extends Activity implements SaisieActivity  {
         this.pionsDefenseur[1]=this.getResources().getColor(R.color.black);
 
         //L'attaquant a des pions de couleurs
-        this.pionsAttaquant = new Integer[6];
+        if(emptyPion) {
+            this.pionsAttaquant = new Integer[7];
+        } else {
+            this.pionsAttaquant = new Integer[6];
+        }
         this.pionsAttaquant[0]=this.getResources().getColor(R.color.pink);
         this.pionsAttaquant[1]=this.getResources().getColor(R.color.purple);
         this.pionsAttaquant[2]=this.getResources().getColor(R.color.blue);
         this.pionsAttaquant[3]=this.getResources().getColor(R.color.green);
         this.pionsAttaquant[4]=this.getResources().getColor(R.color.yellow);
         this.pionsAttaquant[5]=this.getResources().getColor(R.color.white);
+        if(emptyPion) {
+            this.pionsAttaquant[6]=this.getResources().getColor(R.color.pionVide);
+        }
 
         // on inisialise la saisie
         this.saisie.setChoix(this.pionsAttaquant);

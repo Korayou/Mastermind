@@ -74,9 +74,16 @@ public class GameView extends View {
         //copie des couleurs dispos
         LinkedList<Integer> couleurs = new LinkedList<Integer>();
         couleurs.addAll(this.saisie.getChoix());
-        for (int i=0;i<this.saisie.getChoix().size();i++){
-            this.circle.setColor(couleurs.pop());
-            canvas.drawCircle((i*this.getWidth()*2/13+this.getWidth()/8),this.getHeight()-this.getHeight()/7, this.getWidth()/16, this.circle);
+        if(this.saisie.getChoix().size() == 6 || this.saisie.getChoix().size() == 2) {
+            for (int i = 0; i < this.saisie.getChoix().size(); i++) {
+                this.circle.setColor(couleurs.pop());
+                canvas.drawCircle((i * this.getWidth() * 2 / 13 + this.getWidth() / 8), this.getHeight() - this.getHeight() / 7, this.getWidth() / 16, this.circle);
+            }
+        } else if(this.saisie.getChoix().size() == 7) {
+            for (int i = 0; i < this.saisie.getChoix().size(); i++) {
+                this.circle.setColor(couleurs.pop());
+                canvas.drawCircle((i * this.getWidth() * 2 / 14 + this.getWidth() / 14), this.getHeight() - this.getHeight() / 7, this.getWidth() / 19, this.circle);
+            }
         }
 
         // bouton valider

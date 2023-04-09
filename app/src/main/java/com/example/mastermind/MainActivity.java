@@ -26,9 +26,7 @@ public class MainActivity extends Activity {
             public void onClick(View v) {
                 Intent HotSeat = new Intent(MainActivity.this, GameActivity.class);
                 HotSeat.putExtra("bot", false);
-                if(pionV) {
-                    HotSeat.putExtra("pionVide", true);
-                }
+                HotSeat.putExtra("pionVide", pionV);
                 startActivity(HotSeat);
             }
         });
@@ -37,9 +35,7 @@ public class MainActivity extends Activity {
             public void onClick(View v) {
                 Intent ordi = new Intent(MainActivity.this, GameActivity.class);
                 ordi.putExtra("bot", true);
-                if(pionV) {
-                    ordi.putExtra("pionVide", true);
-                }
+                ordi.putExtra("pionVide", pionV);
                 startActivity(ordi);
             }
         });
@@ -47,7 +43,7 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View v) {
                 Intent settings = new Intent(MainActivity.this, SettingsActivity.class);
-                startActivityForResult(settings, 1);
+                startActivityForResult(settings, 2);
             }
         });
         mRules.setOnClickListener(new View.OnClickListener() {
@@ -63,7 +59,7 @@ public class MainActivity extends Activity {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(requestCode == 1) {
+        if(requestCode == 2) {
             pionV = data.getBooleanExtra("pionV", false);
         }
     }

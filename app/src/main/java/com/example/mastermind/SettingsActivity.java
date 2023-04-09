@@ -36,7 +36,7 @@ public class SettingsActivity extends Activity {
             public void onClick(View v) {
                 Intent intent = new Intent();
                 intent.putExtra("pionV", pionV);
-                setResult(1, intent);
+                setResult(2, intent);
                 finish();
             }
         });
