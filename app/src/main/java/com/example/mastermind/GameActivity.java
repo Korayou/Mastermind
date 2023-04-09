@@ -87,6 +87,10 @@ public class GameActivity extends Activity implements SaisieActivity  {
         }
     }
 
+    public int getNbrPion() {
+        return this.saisie.getSizeChoix();
+    }
+
     //Change l'état de soumission à notation après qu'une combinaision ai été soumise puis inversement
     public void changeState() {
         if(!this.bot) {
@@ -200,7 +204,7 @@ public class GameActivity extends Activity implements SaisieActivity  {
         this.pionsAttaquant[4]=this.getResources().getColor(R.color.yellow);
         this.pionsAttaquant[5]=this.getResources().getColor(R.color.white);
         if(emptyPion) {
-            this.pionsAttaquant[6]=this.getResources().getColor(R.color.pionVide);
+            this.pionsAttaquant[6]=this.getResources().getColor(R.color.vide);
         }
 
         // on inisialise la saisie

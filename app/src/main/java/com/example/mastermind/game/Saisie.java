@@ -79,6 +79,10 @@ public class Saisie {
         }
     }
 
+    public int getSizeChoix() {
+        return this.choix.size();
+    }
+
     public Integer[] getSelection(){
         Integer[] selectiontab=new Integer[4];
         for (int i=0;i<this.selection.size();i++){

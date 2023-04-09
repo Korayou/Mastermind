@@ -8,5 +8,7 @@ public interface SaisieActivity {
     void removePion();
 
     void clearChoix();
+
+    int getNbrPion();
 }
     

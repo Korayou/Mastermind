@@ -71,4 +71,8 @@ public class ChoiceCombi extends Activity  implements SaisieActivity {
         this.saisie.initSelection(this.getResources().getColor(R.color.pionVide));
         this.view.invalidate();
     }
+
+    public int getNbrPion() {
+        return this.saisie.getSizeChoix();
+    }
 }
