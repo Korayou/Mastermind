@@ -144,14 +144,15 @@ public class GameActivity extends Activity implements SaisieActivity  {
         for (int i=0;i<4;i++){
             this.saisie.addSelection(this.combiGagnante[i]);
         }
-        EndView lastview=new EndView(this, this.grille, this.combiGagnante);
+        EndView lastview=new EndView(this, this.grille, this.combiGagnante, this.rootView);
         this.view=lastview;
         this.rootView.removeAllViews();
-        this.view.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+        this.view.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        this.view.setBackgroundColor(this.getResources().getColor(R.color.grey));
         this.rootView.addView(this.view);
 
         TextView textView = new TextView(this);
-        textView.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        textView.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         textView.setGravity(Gravity.CENTER);
         if (gagne){
             textView.setText("Victoire de l'attaquant en "+this.grille.getSizeSubs()+" coups");
@@ -159,7 +160,7 @@ public class GameActivity extends Activity implements SaisieActivity  {
             textView.setText("Victoire du défenseur");
         }
         this.rootView.addView(textView);
-        System.out.println(textView.getText());
+        System.out.println(textView.getX() + " : " + textView.getY());
         this.rootView.invalidate();
     }
 
