@@ -35,7 +35,7 @@ public class ChoiceCombi extends Activity  implements SaisieActivity {
             for (int i=0;i<this.saisie.getSizeSelection();i++) {
                 tabpions[i] = this.saisie.getSelection()[i];
             }
-            returnIntent.putExtra("choix", this.saisie.getSelection());
+            returnIntent.putExtra("choix", tabpions);
             setResult(Activity.RESULT_OK, returnIntent);
             finish();
         }
