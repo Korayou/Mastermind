@@ -37,14 +37,22 @@ public class Saisie {
         this.sizeSelection=0;
 
     }
-    //addSelection permet d'ajouter un pion à la zone de saisie
+    //addSelection permet d'ajouter un pion par index à la zone de saisie
     public void addSelection(int indexcolor){
         //On vérifie qu'il n'y a pas déjà 4 pions
         if (this.sizeSelection<4){
             this.selection.set(this.sizeSelection,this.choix.get(indexcolor));
             this.sizeSelection+=1;
         }
+    }
 
+    //addSelection permet d'ajouter un pion par index à la zone de saisie
+    public void addSelection(Integer color){
+        //On vérifie qu'il n'y a pas déjà 4 pions
+        if (this.sizeSelection<4){
+            this.selection.set(this.sizeSelection,color);
+            this.sizeSelection++;
+        }
     }
 
     public void removeSelection(Integer pionVide) {

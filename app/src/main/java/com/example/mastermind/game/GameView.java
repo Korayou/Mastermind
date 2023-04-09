@@ -25,12 +25,13 @@ public class GameView extends View {
     private Bitmap cancelBtn;
     private Bitmap backBtn;
     private Bitmap validBtn;
+    private SaisieActivity activity;
     public GameView(Context con, SaisieActivity context, Saisie saisie, Grille grille) {
         super(con);
+        this.activity=context;
         this.saisie=saisie;
         this.grille=grille;
         this.setOnTouchListener(new TouchListener(context));
-        //state indique true si le joueur soumet une combinaison ou false si elle est noté
         this.circle = new Paint();
     }
 

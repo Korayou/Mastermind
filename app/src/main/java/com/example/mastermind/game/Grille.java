@@ -83,5 +83,8 @@ public class Grille {
         }
         return lastNotation;
     }
+    public int getSizeSubs(){
+        return this.sizeSubs;
+    }
 
 }

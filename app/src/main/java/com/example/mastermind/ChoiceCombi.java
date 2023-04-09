@@ -18,20 +18,27 @@ public class ChoiceCombi extends Activity  implements SaisieActivity {
         super.onCreate(savedInstanceState);
         int[] tab = getIntent().getIntArrayExtra("pions");
         this.pions=new Integer[6];
-        for (int i=0;i<tab.length-1;i++) {
+        for (int i=0;i<tab.length;i++) {
             this.pions[i] = tab[i];
         }
         this.saisie=new Saisie();
         this.saisie.initSelection(this.getResources().getColor(R.color.pionVide));
         this.saisie.setChoix(this.pions);
         this.view=new GameView(this,this,this.saisie, null);
+        setContentView(view);
     }
 
     public void changeState(){
-        Intent returnIntent = new Intent();
-        returnIntent.putExtra("choix",this.saisie.getSelection());
-        setResult(Activity.RESULT_OK,returnIntent);
-        finish();
+        if(this.saisie.getSizeSelection()==4) {
+            Intent returnIntent = new Intent();
+            int[] tabpions=new int[6];
+            for (int i=0;i<this.saisie.getSizeSelection();i++) {
+                tabpions[i] = this.saisie.getSelection()[i];
+            }
+            returnIntent.putExtra("choix", this.saisie.getSelection());
+            setResult(Activity.RESULT_OK, returnIntent);
+            finish();
+        }
     }
 
     public void addChoix(int choix){

@@ -15,6 +15,7 @@ import com.example.mastermind.game.Saisie;
 public class GameActivity extends Activity implements SaisieActivity  {
     private Integer[] pionsAttaquant;
     private Integer[] pionsDefenseur;
+    private Integer[] combiGagnante;
     private Integer pionVide;
     private Saisie saisie;
     private Grille grille;
@@ -32,8 +33,10 @@ public class GameActivity extends Activity implements SaisieActivity  {
         this.saisie=new Saisie();
         this.grille=new Grille();
         initpions();
-        this.theBot=new Bot(this.pionsAttaquant, this.pionsDefenseur, this.pionVide);
-        if(!this.bot){
+        if (this.bot){
+            this.theBot=new Bot(this.pionsAttaquant, this.pionsDefenseur, this.pionVide);
+            this.combiGagnante=this.theBot.getCollectionWin();
+        } else if(!this.bot){
             Intent choiceCombi = new Intent(this, ChoiceCombi.class);
             int[] tabpions=new int[6];
             for (int i=0;i<this.pionsAttaquant.length;i++) {
@@ -46,13 +49,28 @@ public class GameActivity extends Activity implements SaisieActivity  {
         setContentView(view);
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == 1) {
+            if(resultCode == Activity.RESULT_OK){
+                int[] tab = data.getIntArrayExtra("choix");
+                this.combiGagnante=new Integer[6];
+                for (int i=0;i<tab.length;i++) {
+                    this.combiGagnante[i] = tab[i];
+                }
+            }
+        }
+    }
+
     //Change l'état de soumission à notation après qu'une combinaision ai été soumise puis inversement
     public void changeState() {
         if(!this.bot) {
             if (!this.state) {
                 this.saisie.setChoix(this.pionsAttaquant);
                 this.grille.addNotation(this.saisie.getSelection());
-                victoire();
+                end();
                 this.saisie.initSelection(this.getResources().getColor(R.color.pionVide));
                 this.view.invalidate();
                 this.state = !this.state;
@@ -69,7 +87,7 @@ public class GameActivity extends Activity implements SaisieActivity  {
             this.saisie.initSelection(this.getResources().getColor(R.color.pionVide));
             //On fait noter la combinaison au Bot
             this.grille.addNotation(this.theBot.notation((combi)));
-            victoire();
+            end();
             this.view.invalidate();
         }
     }
@@ -90,7 +108,7 @@ public class GameActivity extends Activity implements SaisieActivity  {
         this.view.invalidate();
     }
 
-    public boolean victoire (){
+    public void end (){
         Integer[] lastNotation = this.grille.getLastNotation();
         int nbWin=0;
         for (int i=0;i<4;i++){
@@ -100,10 +118,16 @@ public class GameActivity extends Activity implements SaisieActivity  {
         }
         if(nbWin==4) {
             System.out.println("WIN");
-            return true;
-        } else {
+            victoire(true);
+        } else if (this.grille.getSizeSubs()==10){
             System.out.println("LOSE");
-            return false;
+            victoire(false);
+        }
+    }
+
+    public void victoire(boolean gagne){
+        for (int i=0;i<4;i++){
+            this.saisie.addSelection(this.combiGagnante[i]);
         }
     }
 

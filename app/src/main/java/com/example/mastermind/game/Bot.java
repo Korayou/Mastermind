@@ -74,4 +74,8 @@ public class Bot {
         }
         return tabnote;
     }
+
+    public Integer[] getCollectionWin(){
+        return this.collectionWin;
+    }
 }
