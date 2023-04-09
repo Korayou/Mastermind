@@ -43,8 +43,10 @@ public class Bot {
         for(int i=0; i<4;i++) {
             if (copyCombi[i]==soumission[i]) {
                 note.add(this.pionsNotation[1]);
+                System.out.println(copyCombi[i]+" good "+i);
                 copyCombi[i]=null;
-                System.out.println(note.getLast()+" good "+i);
+                soumission[i]=null;
+                System.out.println(copyCombi[i]+" good "+i);
             }
         }
 
@@ -54,8 +56,9 @@ public class Bot {
                 for (int y=0;y<4;y++){
                     if (soumission[y]==copyCombi[i]) {
                         note.add(this.pionsNotation[0]);
-                        System.out.println(note.getLast() + " almost "+i);
+                        System.out.println(copyCombi[i] + " almost "+i+" "+y);
                         copyCombi[i] = null;
+                        System.out.println(copyCombi[i] + " almost "+i+" "+y);
                     }
                 }
             }

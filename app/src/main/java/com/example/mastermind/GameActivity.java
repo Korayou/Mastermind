@@ -154,12 +154,13 @@ public class GameActivity extends Activity implements SaisieActivity  {
         textView.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         textView.setGravity(Gravity.CENTER);
         if (gagne){
-            textView.setText("Victoire de l'attaquand en test coups");
+            textView.setText("Victoire de l'attaquant en "+this.grille.getSizeSubs()+" coups");
         } else {
             textView.setText("Victoire du défenseur");
         }
         this.rootView.addView(textView);
         System.out.println(textView.getText());
+        this.rootView.invalidate();
     }
 
     //initialise les collections de pions et remplie saisie et grille de pions vides
