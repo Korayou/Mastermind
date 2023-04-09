@@ -84,6 +84,9 @@ public class GameActivity extends Activity implements SaisieActivity  {
                     this.combiGagnante[i] = tab[i];
                 }
             }
+            if(resultCode == Activity.RESULT_CANCELED) {
+                this.finish();
+            }
         }
     }
 
