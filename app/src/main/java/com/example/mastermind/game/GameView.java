@@ -38,7 +38,6 @@ public class GameView extends View {
     @Override
     protected void onDraw(Canvas canvas){
         super.onDraw(canvas);
-        this.setBackgroundColor(this.getResources().getColor(R.color.grey));
         if(this.grille!=null) {
             //affichage des anciennes soumissions
             //copie des soumissions

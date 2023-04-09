@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import com.example.mastermind.game.GameView;
 import com.example.mastermind.game.Saisie;
@@ -25,7 +27,10 @@ public class ChoiceCombi extends Activity  implements SaisieActivity {
         this.saisie.initSelection(this.getResources().getColor(R.color.pionVide));
         this.saisie.setChoix(this.pions);
         this.view=new GameView(this,this,this.saisie, null);
-        setContentView(view);
+        this.view.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+        setContentView(R.layout.activity_game);
+        LinearLayout linearLayout = findViewById(R.id.layout);
+        linearLayout.addView(this.view);
     }
 
     public void changeState(){

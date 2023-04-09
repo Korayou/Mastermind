@@ -5,12 +5,18 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Paint;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
+import com.example.mastermind.end.EndView;
 import com.example.mastermind.game.Bot;
 import com.example.mastermind.game.GameView;
 import com.example.mastermind.game.Grille;
 import com.example.mastermind.game.Saisie;
+import com.example.mastermind.game.TapListener;
 
 public class GameActivity extends Activity implements SaisieActivity  {
     private Integer[] pionsAttaquant;
@@ -23,6 +29,7 @@ public class GameActivity extends Activity implements SaisieActivity  {
     private Bot theBot;
     private boolean state;
     private View view;
+    private LinearLayout rootView;
 
 
     @Override
@@ -46,7 +53,11 @@ public class GameActivity extends Activity implements SaisieActivity  {
             startActivityForResult(choiceCombi, 1);
         }
         this.view=new GameView(this,this,this.saisie, this.grille);
-        setContentView(view);
+        this.view.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+        setContentView(R.layout.activity_game);
+        this.rootView = findViewById(R.id.layout);
+        this.rootView.addView(this.view);
+        this.rootView.setOnTouchListener(new TapListener(this));
     }
 
     @Override
@@ -70,7 +81,7 @@ public class GameActivity extends Activity implements SaisieActivity  {
             if (!this.state) {
                 this.saisie.setChoix(this.pionsAttaquant);
                 this.grille.addNotation(this.saisie.getSelection());
-                end();
+                if(end()){return;}
                 this.saisie.initSelection(this.getResources().getColor(R.color.pionVide));
                 this.view.invalidate();
                 this.state = !this.state;
@@ -87,7 +98,7 @@ public class GameActivity extends Activity implements SaisieActivity  {
             this.saisie.initSelection(this.getResources().getColor(R.color.pionVide));
             //On fait noter la combinaison au Bot
             this.grille.addNotation(this.theBot.notation((combi)));
-            end();
+            if(end()){return;}
             this.view.invalidate();
         }
     }
@@ -108,7 +119,7 @@ public class GameActivity extends Activity implements SaisieActivity  {
         this.view.invalidate();
     }
 
-    public void end (){
+    public boolean end (){
         Integer[] lastNotation = this.grille.getLastNotation();
         int nbWin=0;
         for (int i=0;i<4;i++){
@@ -119,9 +130,13 @@ public class GameActivity extends Activity implements SaisieActivity  {
         if(nbWin==4) {
             System.out.println("WIN");
             victoire(true);
+            return true;
         } else if (this.grille.getSizeSubs()==10){
             System.out.println("LOSE");
             victoire(false);
+            return true;
+        } else {
+            return false;
         }
     }
 
@@ -129,6 +144,22 @@ public class GameActivity extends Activity implements SaisieActivity  {
         for (int i=0;i<4;i++){
             this.saisie.addSelection(this.combiGagnante[i]);
         }
+        EndView lastview=new EndView(this, this.grille, this.combiGagnante);
+        this.view=lastview;
+        this.rootView.removeAllViews();
+        this.view.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+        this.rootView.addView(this.view);
+
+        TextView textView = new TextView(this);
+        textView.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        textView.setGravity(Gravity.CENTER);
+        if (gagne){
+            textView.setText("Victoire de l'attaquand en test coups");
+        } else {
+            textView.setText("Victoire du défenseur");
+        }
+        this.rootView.addView(textView);
+        System.out.println(textView.getText());
     }
 
     //initialise les collections de pions et remplie saisie et grille de pions vides
