@@ -7,6 +7,7 @@
     <string name="header">Paramètres</string>
 
     <!-- Sync Preferences -->
+    <string name="back_menu">&lt; Retour au menu</string>
     <string name="pions_title">Autoriser les pions vides</string>
     <string name="summary">Cette fonctionnalité augmente la difficulté du jeu pour l\'attaquant</string>
     
